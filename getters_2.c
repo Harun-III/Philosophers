@@ -1,9 +1,16 @@
-#include "philo.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   getters_2.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/02 17:30:07 by eghalime          #+#    #+#             */
+/*   Updated: 2024/11/02 17:30:09 by eghalime         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// int	get_nb_philos(t_data *data)
-// {
-// 	return (data->nb_philos);
-// }
+#include "philo.h"
 
 long	get_die_time(t_data *data)
 {
@@ -19,4 +26,3 @@ long	get_eat_time(t_data *data)
 {
 	return (data->eat_time);
 }
-

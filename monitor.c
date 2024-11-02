@@ -1,5 +1,16 @@
-#include "philo.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   monitor.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/02 17:32:11 by eghalime          #+#    #+#             */
+/*   Updated: 2024/11/02 17:33:23 by eghalime         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "philo.h"
 
 bool	is_philo_full(t_data *data, t_philo *philo)
 {
@@ -33,7 +44,6 @@ void	notify_all_philos(t_data *data)
 	int		i;
 	int		nb_philos;
 
-	// nb_philos = get_nb_philos(data);
 	nb_philos = data->nb_philos;
 	philos = data->philos;
 	i = -1;
@@ -49,7 +59,6 @@ void	*all_full_routine(void *data_p)
 
 	data = (t_data *)data_p;
 	i = -1;
-	// nb_philos = get_nb_philos(data);
 	nb_philos = data->nb_philos;
 	while (++i < nb_philos && get_keep_iter(data))
 	{
@@ -64,9 +73,7 @@ void	*all_full_routine(void *data_p)
 	}
 	return (NULL);
 }
-// usleep(200);
 
-//  || (get_philo_state(&philos[i]) == DEAD
 void	*all_alive_routine(void *data_p)
 {
 	int		i;
@@ -76,7 +83,6 @@ void	*all_alive_routine(void *data_p)
 
 	data = (t_data *)data_p;
 	philos = data->philos;
-	// nb_philos = get_nb_philos(data);
 	nb_philos = data->nb_philos;
 	i = -1;
 	while (++i < nb_philos && get_keep_iter(data))
@@ -94,4 +100,3 @@ void	*all_alive_routine(void *data_p)
 	}
 	return (NULL);
 }
-// usleep(200);

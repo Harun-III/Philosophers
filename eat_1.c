@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   eat_1.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/02 17:28:45 by eghalime          #+#    #+#             */
+/*   Updated: 2024/11/02 17:28:55 by eghalime         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	drop_forks(t_philo *philo)
@@ -37,10 +49,3 @@ int	eat(t_philo *philo)
 	drop_forks(philo);
 	return (0);
 }
-
-// void	print_nb_full_p(t_data *data)
-// {
-// 	pthread_mutex_lock(&data->mut_print);
-// 	printf("%d FULL(%d) PHILOS\n", data->nb_full_p, data->nb_meals);
-// 	pthread_mutex_unlock(&data->mut_print);
-// }

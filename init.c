@@ -1,10 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/02 17:31:46 by eghalime          #+#    #+#             */
+/*   Updated: 2024/11/02 17:32:04 by eghalime         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-static void init_fork_mutexes(t_data *data)
+static void	init_fork_mutexes(t_data *data)
 {
-    int i = -1;
-    while (++i < data->nb_philos)
-        pthread_mutex_init(&data->forks[i], NULL);
+	int	i;
+
+	i = -1;
+	while (++i < data->nb_philos)
+		pthread_mutex_init(&data->forks[i], NULL);
 }
 
 /*
@@ -16,31 +30,31 @@ static void init_fork_mutexes(t_data *data)
 ** order prevents all philosophers from waiting on each other, 
 ** thereby avoiding deadlock.
 */
-void init_forks(t_data *data)
+void	init_forks(t_data *data)
 {
-    int	i;
-	int	philo_position;
-    int	next_fork;
-    t_philo	*philos;
-    
-    philos = data->philos;
-    init_fork_mutexes(data);
-    i = -1;
-    while (++i < data->nb_philos)
-    {
-        philo_position = i;
-        next_fork = (philo_position + 1) % data->nb_philos;
-        if ((philos[i].id % 2) == 0)
-        {
-            philos[i].left_f = &data->forks[philo_position];
-            philos[i].right_f = &data->forks[next_fork];
-        }
-        else
-        {
-            philos[i].left_f = &data->forks[next_fork];
-            philos[i].right_f = &data->forks[philo_position];
-        }
-    }
+	int		i;
+	int		philo_position;
+	int		next_fork;
+	t_philo	*philos;
+
+	philos = data->philos;
+	init_fork_mutexes(data);
+	i = -1;
+	while (++i < data->nb_philos)
+	{
+		philo_position = i;
+		next_fork = (philo_position + 1) % data->nb_philos;
+		if ((philos[i].id % 2) == 0)
+		{
+			philos[i].left_f = &data->forks[philo_position];
+			philos[i].right_f = &data->forks[next_fork];
+		}
+		else
+		{
+			philos[i].left_f = &data->forks[next_fork];
+			philos[i].right_f = &data->forks[philo_position];
+		}
+	}
 }
 
 void	init_philos(t_data *data)

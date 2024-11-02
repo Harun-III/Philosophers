@@ -1,5 +1,16 @@
-#include "philo.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   eat_2.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/02 17:29:09 by eghalime          #+#    #+#             */
+/*   Updated: 2024/11/02 17:29:23 by eghalime         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "philo.h"
 
 void	drop_left_fork(t_philo *philo)
 {
@@ -31,7 +42,6 @@ int	take_right_fork(t_philo *philo)
 
 int	take_forks(t_philo *philo)
 {
-	// if (get_nb_philos(philo->data) == 1)
 	if (philo->data->nb_philos == 1)
 		return (handle_1_philo(philo));
 	if (take_right_fork(philo) != 0)
