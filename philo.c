@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:35:26 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/02 17:37:10 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/02 17:55:10 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	join_threads(t_data *data)
 
 void	leaks(void)
 {
-	system("leaks a.out | sed '/^$/d' | tail -1");
+	system("leaks philo | sed '/^$/d' | tail -1");
 	// system("leaks philo");
 }
 
@@ -70,7 +70,7 @@ int main(int argc, char **argv)
 	if (5 == argc || 6 == argc)
 	{
 		parse_and_set_timers(&data, argv);
-		init_data(&data, argc, argv);
+		init_data(&data);
 		init_philos(&data);
 		init_forks(&data);
 		if (run_threads(&data) != 0)

@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:31:46 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/02 17:32:04 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/02 17:54:13 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ static void	malloc_data(t_data *data)
 ** The mutex intialized here are used to protect the data
 ** that is shared between the threads
 */
-void	init_data(t_data *data, int argc, char **argv)
+void	init_data(t_data *data)
 {
 	data->nb_full_p = 0;
 	data->keep_iterating = true;

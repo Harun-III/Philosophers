@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:37:36 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/02 17:38:54 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/02 17:54:26 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ typedef struct s_data
 //1_parsing.c (mine)
 void		parse_and_set_timers(t_data *data, char **argv);
 void		check_time(t_data *data);
-static long	ft_atol(char *s);
+// static long	ft_atol(char *s);
 
 // routine.c
 void		*routine(void *philo_p);
@@ -111,7 +111,7 @@ int			ft_atoi(char *str);
 void		print_instruction(void);
 
 // init_data.c
-void		init_data(t_data *data, int argc, char **argv);
+void		init_data(t_data *data);
 void		init_philos(t_data *data);
 void		init_forks(t_data *data);
 
