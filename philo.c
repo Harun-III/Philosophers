@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:35:26 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/02 17:55:10 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/02 17:59:09 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	leaks(void)
 	// system("leaks philo");
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	atexit(leaks);
 	t_data	data;

@@ -1,0 +1,4 @@
+0_ make file (What should I change file)
+1_ put all files in "philo/" ripo
+2_ read full subject
+	read correction file
