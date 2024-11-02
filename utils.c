@@ -1,5 +1,16 @@
-#include "philo.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/02 17:40:13 by eghalime          #+#    #+#             */
+/*   Updated: 2024/11/02 17:41:36 by eghalime         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "philo.h"
 
 int	handle_1_philo(t_philo *philo)
 {
@@ -21,7 +32,6 @@ void	free_data(t_data *data)
 	int	i;
 	int	nb_philos;
 
-	// nb_philos = get_nb_philos(data);
 	nb_philos = data->nb_philos;
 	i = -1;
 	while (++i < nb_philos)
@@ -55,10 +65,4 @@ void	print_mut(t_data *data, char *msg)
 	pthread_mutex_lock(&data->mut_print);
 	printf("%s\n", msg);
 	pthread_mutex_unlock(&data->mut_print);
-}
-
-void	error_exit(const char *message)
-{
-	printf(RED"Error: %s\n"RST, message);
-    exit(EXIT_FAILURE);
 }

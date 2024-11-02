@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/02 17:37:36 by eghalime          #+#    #+#             */
+/*   Updated: 2024/11/02 17:38:54 by eghalime         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -10,10 +22,6 @@
 # include <stdint.h>
 # include <stdbool.h>
 # include <limits.h>    // INT_MAX
-
-
-//# define WRONG_INPUT 1
-//# define MALLOC_ERROR 2
 
 # define TAKE_FORKS "has taken a fork"
 # define THINK "is thinking"
@@ -39,7 +47,7 @@
 /*
 ** Convertion
 */
-#define MILLI_TO_MICRO 1000
+# define MILLI_TO_MICRO 1000
 
 typedef enum e_philo_state
 {
@@ -64,8 +72,8 @@ typedef struct s_philo
 	pthread_mutex_t	mut_state;
 	pthread_mutex_t	mut_nb_meals_had;
 	pthread_mutex_t	mut_last_eat_time;
-	long		last_eat_time;
-}t_philo;
+	long			last_eat_time;
+}	t_philo;
 
 typedef struct s_data
 {
@@ -73,11 +81,11 @@ typedef struct s_data
 	int				nb_meals;
 	int				nb_full_p;
 	bool			keep_iterating;
-	long		eat_time;
-	long		die_time;
-	long		sleep_time;
-	long		start_time;
-	pthread_mutex_t	mut_print; 
+	long			eat_time;
+	long			die_time;
+	long			sleep_time;
+	long			start_time;
+	pthread_mutex_t	mut_print;
 	pthread_mutex_t	mut_keep_iter;
 	pthread_mutex_t	mut_start_time;
 	pthread_t		monit_all_alive;
@@ -85,11 +93,11 @@ typedef struct s_data
 	pthread_t		*philo_ths;
 	pthread_mutex_t	*forks;
 	t_philo			*philos;
-}t_data;
+}			t_data;
 
 //1_parsing.c (mine)
-void	parse_and_set_timers(t_data *data, char **argv);
-void	check_time(t_data *data);
+void		parse_and_set_timers(t_data *data, char **argv);
+void		check_time(t_data *data);
 static long	ft_atol(char *s);
 
 // routine.c
@@ -134,15 +142,15 @@ int			ft_sleep(t_philo *philo);
 int			think(t_philo *philo);
 
 // getters.c
-long	get_die_time(t_data *data);
-long	get_eat_time(t_data *data);
-long	get_sleep_time(t_data *data);
+long		get_die_time(t_data *data);
+long		get_eat_time(t_data *data);
+long		get_sleep_time(t_data *data);
 bool		get_keep_iter(t_data *data);
-long	get_start_time(t_data *data);
+long		get_start_time(t_data *data);
 int			get_nb_philos(t_data *data);
 t_state		get_philo_state(t_philo *philo);
 int			get_nb_meals_philo_had(t_philo *philo);
-long	get_last_eat_time(t_philo *philo);
+long		get_last_eat_time(t_philo *philo);
 
 // setters.c
 void		set_keep_iterating(t_data *data, bool set_to);
@@ -154,10 +162,6 @@ void		free_data(t_data *data);
 void		print_msg(t_data *data, int id, char *msg);
 void		print_mut(t_data *data, char *msg);
 int			handle_1_philo(t_philo *philo);
-void	error_exit(const char *message);
-
-//delet
-void	print_initial_state(t_data *table);
-
+void		error_exit(const char *message);
 
 #endif

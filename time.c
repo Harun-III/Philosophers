@@ -1,26 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   time.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/02 17:39:36 by eghalime          #+#    #+#             */
+/*   Updated: 2024/11/02 17:41:26 by eghalime         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
-
-// void	wait_until(long wakeup_time)
-// {
-// 	int			margin;
-// 	long	time;
-
-// 	margin = 5;
-// 	while (1)
-// 	{
-// 		time = get_time();
-// 		if (wakeup_time <= time + margin)
-// 		{
-// 			while (wakeup_time > time)
-// 				time = get_time();
-// 			break ;
-// 		}
-// 		else
-// 		{
-// 			usleep(1000 * (wakeup_time - time - margin));
-// 		}
-// 	}
-// }
 
 /*
 ** This function id made because usleep() is not precise enough
@@ -59,4 +49,10 @@ long	get_time(void)
 	if (gettimeofday(&tv, NULL))
 		return (0);
 	return ((tv.tv_sec * (long)1000) + (tv.tv_usec / (long)1000));
+}
+
+void	error_exit(const char *message)
+{
+	printf(RED"Error: %s\n"RST, message);
+	exit(EXIT_FAILURE);
 }
