@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:35:26 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/02 17:59:09 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/03 14:44:16 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ int	run_threads(t_data *data)
 	while (++i < nb_of_philos)
 	{
 		if (pthread_create(&data->philo_ths[i], NULL,
-				&routine, &data->philos[i]))
+				routine, &data->philos[i]))
 			return (1);
 	}
 	if (pthread_create(&data->monit_all_alive, NULL,
-			&all_alive_routine, data))
+			all_alive_routine, data))
 		return (1);
 	if (nb_meals_option(data) == true
 		&& pthread_create(&data->monit_all_full, NULL,
-			&all_full_routine, data))
+			all_full_routine, data))
 		return (1);
 	return (0);
 }
