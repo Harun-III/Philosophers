@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:37:36 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/02 17:54:26 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/03 15:24:05 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ typedef enum e_philo_state
 	THINKING = 2,
 	DEAD = 3,
 	FULL = 4,
-	IDLE = 5
 }	t_state;
 
 struct	s_data;
