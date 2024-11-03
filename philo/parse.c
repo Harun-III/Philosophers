@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:34:28 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/02 17:34:41 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/03 10:46:45 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,6 @@ static long	ft_atol(char *s)
 	return (return_value);
 }
 
-void	check_time(t_data *data)
-{
-	if (data->die_time < 60 || data->eat_time < 60
-		|| data->sleep_time < 60)
-		error_exit("Time values must be at least 60 milliseconds");
-}
-
 /*
 ** example of input:
 ** 	./philo 5 400 200 200 [5]
@@ -104,7 +97,6 @@ void	parse_and_set_timers(t_data *data, char **argv)
 	data->die_time = ft_atol(argv[2]);
 	data->eat_time = ft_atol(argv[3]);
 	data->sleep_time = ft_atol(argv[4]);
-	check_time(data);
 	if (argv[5])
 		data->nb_meals = ft_atol (argv[5]);
 	else
