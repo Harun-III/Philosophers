@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:37:36 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/20 19:53:35 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/20 20:54:23 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <sys/time.h>
 # include <stdint.h>
 # include <stdbool.h>
-# include <limits.h>    // INT_MAX
+# include <limits.h>
 
 # define TAKE_FORKS "has taken a fork"
 # define THINK "is thinking"
@@ -44,11 +44,6 @@
 # define C		"\033[1;36m" /* Bold Cyan */
 # define W		"\033[1;37m" /* Bold White */
 
-/*
-** Convertion
-*/
-# define MILLI_TO_MICRO 1000
-
 typedef enum e_philo_state
 {
 	EATING = 0,
@@ -56,6 +51,7 @@ typedef enum e_philo_state
 	THINKING = 2,
 	DEAD = 3,
 	FULL = 4,
+	START = 5
 }	t_state;
 
 struct	s_data;
@@ -94,49 +90,49 @@ typedef struct s_data
 	t_philo			*philos;
 }			t_data;
 
-//1_parsing.c (mine)
+/* parsing.c */
 void		parse_and_set_timers(t_data *data, char **argv);
 void		check_time(t_data *data);
 
-// routine.c
+/* routine.c */
 void		*routine(void *philo_p);
 bool		philo_died(t_philo *philo);
 
-// parse.c
+/* parse.c */
 int			wrong_input_check(int argc, char **argv);
 int			ft_atoi(char *str);
 
-// init_data.c
+/* init_data.c */
 void		init_data(t_data *data);
 void		init_philos(t_data *data);
 void		init_forks(t_data *data);
 
-// time.c
+/* time.c */
 long		get_time(void);
 void		ft_usleep(long time);
 
-// monitoring.c
+/* monitoring.c */
 void		*all_full_routine(void *data_p);
 void		*all_alive_routine(void *data_p);
 
-// eat_1.c
+/* eat_1.c */
 int			eat(t_philo *philo);
 void		update_last_meal_time(t_philo *philo);
 
-// eat_2.c
+/* eat_2.c */
 int			take_forks(t_philo *philo);
 int			take_right_fork(t_philo *philo);
 int			take_left_fork(t_philo *philo);
 void		drop_right_fork(t_philo *philo);
 void		drop_left_fork(t_philo *philo);
 
-// sleep.c
+/* sleep.c */
 int			ft_sleep(t_philo *philo);
 
-// think.c
+/* think.c */
 int			think(t_philo *philo);
 
-// getters.c
+/* getters.c */
 long		get_die_time(t_data *data);
 long		get_eat_time(t_data *data);
 long		get_sleep_time(t_data *data);
@@ -147,11 +143,11 @@ t_state		get_philo_state(t_philo *philo);
 int			get_nb_meals_philo_had(t_philo *philo);
 long		get_last_eat_time(t_philo *philo);
 
-// setters.c
+/* setters.c */
 void		set_keep_iterating(t_data *data, bool set_to);
 void		set_philo_state(t_philo *philo, t_state state);
 
-// utils.c
+/* utils.c */
 bool		nb_meals_option(t_data *data);
 void		free_data(t_data *data);
 void		print_msg(t_data *data, int id, char *msg);
