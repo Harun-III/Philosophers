@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:35:26 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/03 14:44:16 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/20 20:52:58 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,16 @@ int	join_threads(t_data *data)
 	return (0);
 }
 
-void	leaks(void)
+static void	print_exit_error(void)
 {
-	system("leaks philo | sed '/^$/d' | tail -1");
-	// system("leaks philo");
+	error_exit("Invalid number of arguments.\n"
+		GREEN"Usage: ./philo <number_of_philosophers> "
+		"<time_to_die> <time_to_eat> <time_to_sleep> "
+		"[number_of_times_each_philosopher_must_eat]"RST);
 }
 
 int	main(int argc, char **argv)
 {
-	atexit(leaks);
 	t_data	data;
 
 	if (5 == argc || 6 == argc)
@@ -86,11 +87,6 @@ int	main(int argc, char **argv)
 		free_data(&data);
 	}
 	else
-	{
-		error_exit("Invalid number of arguments.\n"
-			GREEN"Usage: ./philo <number_of_philosophers> "
-			"<time_to_die> <time_to_eat> <time_to_sleep> "
-			"[number_of_times_each_philosopher_must_eat]"RST);
-	}
+		print_exit_error();
 	return (0);
 }
