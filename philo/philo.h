@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:37:36 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/03 15:24:05 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/20 19:53:35 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,17 +97,14 @@ typedef struct s_data
 //1_parsing.c (mine)
 void		parse_and_set_timers(t_data *data, char **argv);
 void		check_time(t_data *data);
-// static long	ft_atol(char *s);
 
 // routine.c
 void		*routine(void *philo_p);
 bool		philo_died(t_philo *philo);
 
 // parse.c
-int			check_input(int argc, char **argv);
 int			wrong_input_check(int argc, char **argv);
 int			ft_atoi(char *str);
-void		print_instruction(void);
 
 // init_data.c
 void		init_data(t_data *data);
@@ -117,7 +114,6 @@ void		init_forks(t_data *data);
 // time.c
 long		get_time(void);
 void		ft_usleep(long time);
-void		wait_until(long wakeup_time);
 
 // monitoring.c
 void		*all_full_routine(void *data_p);
@@ -159,7 +155,6 @@ void		set_philo_state(t_philo *philo, t_state state);
 bool		nb_meals_option(t_data *data);
 void		free_data(t_data *data);
 void		print_msg(t_data *data, int id, char *msg);
-void		print_mut(t_data *data, char *msg);
 int			handle_1_philo(t_philo *philo);
 void		error_exit(const char *message);
 

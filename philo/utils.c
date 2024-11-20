@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:40:13 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/02 17:41:36 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/20 19:53:46 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,5 @@ void	print_msg(t_data *data, int id, char *msg)
 	pthread_mutex_lock(&data->mut_print);
 	if (get_keep_iter(data))
 		printf("%ld %d %s\n", time, id, msg);
-	pthread_mutex_unlock(&data->mut_print);
-}
-
-void	print_mut(t_data *data, char *msg)
-{
-	pthread_mutex_lock(&data->mut_print);
-	printf("%s\n", msg);
 	pthread_mutex_unlock(&data->mut_print);
 }
