@@ -1,16 +1,5 @@
-2_ read full subject
-	read correction file
-
 xx_ while reading the correction file:
 - You must verify the absence of data races.
 	You are allowed to use any of the different tools available on the computer,
 	such as valgrind with "--tool=helgrind" and "--tool=drd". In case of any
 	data-race, the evaluation stops here.
-
-xx_ delete last function in: 
-	philo/routine.c
-	delete this from header.h
-		and check what else needs to be deleted	
-	wrong_input_check(int argc, char **argv);
-
-3_ Nrom: philo.c
