@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:37:36 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/20 21:00:30 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:16:30 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,9 +131,9 @@ int			ft_sleep(t_philo *philo);
 int			think(t_philo *philo);
 
 /* getters.c */
-long		get_die_time(t_data *data);
-long		get_eat_time(t_data *data);
-long		get_sleep_time(t_data *data);
+// long		get_die_time(t_data *data);
+// long		get_eat_time(t_data *data);
+// long		get_sleep_time(t_data *data);
 bool		get_keep_iter(t_data *data);
 long		get_start_time(t_data *data);
 int			get_nb_philos(t_data *data);

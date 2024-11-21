@@ -6,12 +6,12 @@
 #    By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/02 17:46:17 by eghalime          #+#    #+#              #
-#    Updated: 2024/11/02 17:52:21 by eghalime         ###   ########.fr        #
+#    Updated: 2024/11/21 18:27:02 by eghalime         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =	eat_1.c eat_2.c \
-		getters_1.c getters_2.c \
+		getters.c\
 		init.c monitor.c parse.c philo.c routine.c \
 		setters.c sleep.c think.c time.c utils.c 
 

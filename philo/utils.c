@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:40:13 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/20 19:53:46 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:24:53 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	handle_1_philo(t_philo *philo)
 {
 	take_left_fork(philo);
-	ft_usleep(get_die_time(philo->data));
+	ft_usleep(philo->data->die_time);
 	set_philo_state(philo, DEAD);
 	return (1);
 }
