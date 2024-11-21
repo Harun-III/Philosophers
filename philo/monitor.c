@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:32:11 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/02 17:33:23 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:10:31 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	*all_full_routine(void *data_p)
 	nb_philos = data->nb_philos;
 	while (++i < nb_philos && get_keep_iter(data))
 	{
-		usleep(1000);
 		if (is_philo_full(data, &data->philos[i]) == false)
 			i = -1;
 	}
@@ -96,7 +95,6 @@ void	*all_alive_routine(void *data_p)
 		}
 		if (i == nb_philos - 1)
 			i = -1;
-		usleep(1000);
 	}
 	return (NULL);
 }
