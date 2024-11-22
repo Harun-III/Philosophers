@@ -66,6 +66,7 @@ void	init_philos(t_data *data)
 	philos = data->philos;
 	while (++i < data->nb_philos)
 	{
+		philos[i].state = INITIAL;
 		philos[i].data = data;
 		philos[i].id = i + 1;
 		philos[i].nb_meals_had = 0;

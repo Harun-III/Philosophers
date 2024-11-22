@@ -50,7 +50,7 @@ typedef enum e_philo_state
 	THINKING = 2,
 	DEAD = 3,
 	FULL = 4,
-	START = 5
+	INITIAL = 10
 }	t_state;
 
 struct	s_data;
