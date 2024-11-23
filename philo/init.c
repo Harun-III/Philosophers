@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:31:46 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/03 15:23:54 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/23 17:54:03 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,39 +21,20 @@ static void	init_fork_mutexes(t_data *data)
 		pthread_mutex_init(&data->forks[i], NULL);
 }
 
-/*
-** Assigns forks to philosophers in a way that avoids deadlock.
-** 
-** Even-numbered philosophers pick up their left fork first,
-** then their right fork. Odd-numbered philosophers pick up
-** their right fork first, then their left fork. This alternating
-** order prevents all philosophers from waiting on each other, 
-** thereby avoiding deadlock.
-*/
 void	init_forks(t_data *data)
 {
 	int		i;
-	int		philo_position;
-	int		next_fork;
 	t_philo	*philos;
 
 	philos = data->philos;
 	init_fork_mutexes(data);
-	i = -1;
+	i = 0;
+	philos[0].left_f = &data->forks[0];
+	philos[0].right_f = &data->forks[data->nb_philos - 1];
 	while (++i < data->nb_philos)
 	{
-		philo_position = i;
-		next_fork = (philo_position + 1) % data->nb_philos;
-		if ((philos[i].id % 2) == 0)
-		{
-			philos[i].left_f = &data->forks[philo_position];
-			philos[i].right_f = &data->forks[next_fork];
-		}
-		else
-		{
-			philos[i].left_f = &data->forks[next_fork];
-			philos[i].right_f = &data->forks[philo_position];
-		}
+		philos[i].left_f = &data->forks[i];
+		philos[i].right_f = &data->forks[i - 1];
 	}
 }
 

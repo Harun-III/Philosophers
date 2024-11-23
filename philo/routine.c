@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:39:03 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/20 19:53:26 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/23 17:28:45 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	*routine(void *philo_p)
 
 	philo = (t_philo *)philo_p;
 	update_last_meal_time(philo);
+	if (philo->id % 2 == 0)
+		ft_usleep(philo->data->eat_time - 20);
 	while (get_philo_state(philo) != DEAD)
 	{
 		if (eat(philo) != 0)
