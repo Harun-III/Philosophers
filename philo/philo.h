@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:37:36 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/21 19:12:30 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/23 23:19:17 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ typedef struct s_philo
 
 typedef struct s_data
 {
+	bool			keep_iterating;
 	int				nb_philos;
 	int				nb_meals;
 	int				nb_full_p;
-	bool			keep_iterating;
 	long			eat_time;
 	long			die_time;
 	long			sleep_time;
@@ -87,8 +87,11 @@ typedef struct s_data
 	pthread_t		*philo_ths;
 	pthread_mutex_t	*forks;
 	t_philo			*philos;
+	bool			is_simulation_finished;
+	pthread_mutex_t	mut_simulation;
 }			t_data;
 
+void		all_alive_routine(t_data *data);
 /* parsing.c */
 void		parse_and_set_timers(t_data *data, char **argv);
 
@@ -109,7 +112,7 @@ void		ft_usleep(long time);
 
 /* monitoring.c */
 void		*all_full_routine(void *data_p);
-void		*all_alive_routine(void *data_p);
+// void		*all_alive_routine(void *data_p);
 bool		philo_died(t_philo *philo);
 
 /* eat_1.c */
@@ -137,7 +140,7 @@ int			get_nb_meals_philo_had(t_philo *philo);
 long		get_last_eat_time(t_philo *philo);
 
 /* setters.c */
-void		set_keep_iterating(t_data *data, bool set_to);
+bool		set_keep_iterating(t_data *data, bool set_to);
 void		set_philo_state(t_philo *philo, t_state state);
 
 // /* utils.c */

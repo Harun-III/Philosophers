@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:31:46 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/23 17:54:03 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/23 23:00:54 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,10 @@ void	init_data(t_data *data)
 {
 	data->nb_full_p = 0;
 	data->keep_iterating = true;
+	data->is_simulation_finished = false;
 	pthread_mutex_init(&data->mut_print, NULL);
 	pthread_mutex_init(&data->mut_keep_iter, NULL);
 	pthread_mutex_init(&data->mut_start_time, NULL);
+	pthread_mutex_init(&data->mut_simulation, NULL);
 	malloc_data(data);
 }

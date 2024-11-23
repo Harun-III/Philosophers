@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:40:13 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/21 18:24:53 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/23 23:26:05 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,10 @@ bool	nb_meals_option(t_data *data)
 void	free_data(t_data *data)
 {
 	int	i;
-	int	nb_philos;
 
-	nb_philos = data->nb_philos;
+	set_keep_iterating(data, false);
 	i = -1;
-	while (++i < nb_philos)
+	while (++i < data->nb_philos)
 	{
 		pthread_mutex_destroy(&data->forks[i]);
 		pthread_mutex_destroy(&data->philos[i].mut_state);
@@ -44,6 +43,7 @@ void	free_data(t_data *data)
 	pthread_mutex_destroy(&data->mut_print);
 	pthread_mutex_destroy(&data->mut_keep_iter);
 	pthread_mutex_destroy(&data->mut_start_time);
+	pthread_mutex_destroy(&data->mut_simulation);
 	free(data->philo_ths);
 	free(data->philos);
 	free(data->forks);
@@ -58,4 +58,16 @@ void	print_msg(t_data *data, int id, char *msg)
 	if (get_keep_iter(data))
 		printf("%ld %d %s\n", time, id, msg);
 	pthread_mutex_unlock(&data->mut_print);
+}
+
+void	notify_all_philos(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->nb_philos)
+	{
+		set_philo_state(&data->philos[i], DEAD);
+		i++;
+	}
 }

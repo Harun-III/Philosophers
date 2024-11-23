@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:32:11 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/21 18:24:42 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/23 23:26:00 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,31 +24,20 @@ bool	is_philo_full(t_data *data, t_philo *philo)
 
 bool	philo_died(t_philo *philo)
 {
-	bool		result;
-	t_data		*data;
+	bool	is_dead;
 
-	data = philo->data;
-	result = false;
-	if (get_time() - get_last_eat_time(philo) > data->die_time
-		&& get_philo_state(philo) != EATING)
+	is_dead = false;
+	pthread_mutex_lock(&philo->mut_state);
+	pthread_mutex_lock(&philo->mut_last_eat_time);
+	if (get_time() - philo->last_eat_time > philo->data->die_time
+		&& philo->state != EATING)
 	{
-		set_philo_state(philo, DEAD);
-		result = true;
+		is_dead = true;
+		philo->state = DEAD;
 	}
-	return (result);
-}
-
-void	notify_all_philos(t_data *data)
-{
-	t_philo	*philos;
-	int		i;
-	int		nb_philos;
-
-	nb_philos = data->nb_philos;
-	philos = data->philos;
-	i = -1;
-	while (++i < nb_philos)
-		set_philo_state(&philos[i], DEAD);
+	pthread_mutex_unlock(&philo->mut_last_eat_time);
+	pthread_mutex_unlock(&philo->mut_state);
+	return (is_dead);
 }
 
 void	*all_full_routine(void *data_p)
@@ -73,28 +62,39 @@ void	*all_full_routine(void *data_p)
 	return (NULL);
 }
 
-void	*all_alive_routine(void *data_p)
+static void	philo_died_set_flag(t_data *data, bool *should_continue, int *i)
 {
-	int		i;
-	int		nb_philos;
-	t_data	*data;
-	t_philo	*philos;
-
-	data = (t_data *)data_p;
-	philos = data->philos;
-	nb_philos = data->nb_philos;
-	i = -1;
-	while (++i < nb_philos && get_keep_iter(data))
+	pthread_mutex_lock(&data->mut_print);
+	pthread_mutex_lock(&data->mut_keep_iter);
+	if (data->keep_iterating)
 	{
-		if (philo_died(&philos[i]) && get_keep_iter(data))
-		{
-			print_msg(data, philos[i].id, DIED);
-			set_keep_iterating(data, false);
-			notify_all_philos(data);
-			break ;
-		}
-		if (i == nb_philos - 1)
-			i = -1;
+		printf("%ld %d %s\n", get_time() - get_start_time(data),
+			data->philos[(*i)].id, DIED);
+		data->keep_iterating = false;
+		notify_all_philos(data);
+		*should_continue = false;
 	}
-	return (NULL);
+	pthread_mutex_unlock(&data->mut_keep_iter);
+	pthread_mutex_unlock(&data->mut_print);
+}
+
+void	all_alive_routine(t_data *data)
+{
+	bool	should_continue;
+	int		i;
+
+	should_continue = true;
+	while (should_continue)
+	{
+		i = -1;
+		while ((++i < data->nb_philos) && should_continue)
+		{
+			if (philo_died(&data->philos[i]))
+				philo_died_set_flag (data, &should_continue, &i);
+		}
+		usleep(100);
+		pthread_mutex_lock(&data->mut_keep_iter);
+		should_continue = data->keep_iterating;
+		pthread_mutex_unlock(&data->mut_keep_iter);
+	}
 }

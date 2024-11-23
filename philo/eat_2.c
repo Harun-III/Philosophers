@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:29:09 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/02 17:29:23 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/23 22:59:32 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,14 @@ int	take_left_fork(t_philo *philo)
 
 int	take_right_fork(t_philo *philo)
 {
-	if (philo_died(philo) || get_philo_state(philo) == DEAD)
+	pthread_mutex_lock(&philo->mut_state);
+	if (philo->state == DEAD)
+	{
+		pthread_mutex_unlock(&philo->mut_state);
 		return (1);
+	}
 	pthread_mutex_lock(philo->right_f);
+	pthread_mutex_unlock(&philo->mut_state);
 	print_msg(philo->data, philo->id, TAKE_FORKS);
 	return (0);
 }
