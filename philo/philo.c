@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:35:26 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/20 20:52:58 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/25 20:41:50 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	run_threads(t_data *data)
 	data->start_time = get_time();
 	while (++i < nb_of_philos)
 	{
+		update_last_meal_time(&data->philos[i]);
 		if (pthread_create(&data->philo_ths[i], NULL,
 				routine, &data->philos[i]))
 			return (1);
