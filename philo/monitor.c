@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:32:11 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/26 02:15:57 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 12:56:45 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,15 @@ void	*all_full_routine(void *data_p)
 	data = (t_data *)data_p;
 	i = -1;
 	nb_philos = data->nb_philos;
-	while (++i < nb_philos && get_keep_iter(data))
+	while (++i < nb_philos)
 	{
 		if (is_philo_full(data, &data->philos[i]) == false)
 			i = -1;
 	}
-	if (get_keep_iter(data) == true)
-	{
-		set_keep_iterating(data, false);
-		notify_all_philos(data);
-	}
+	pthread_mutex_lock(&data->mut_end_loop);
+	data->end_loop = true;
+	pthread_mutex_unlock(&data->mut_end_loop);
+	pthread_mutex_lock(&data->mut_print);
 	return (NULL);
 }
 
@@ -91,6 +90,7 @@ int	all_alive_routine(t_data* data)
 	int		i;
 	int		nb_philos;
 	t_philo	*philos;
+	int		end_loop_flag;
 
 	philos = data->philos;
 	nb_philos = data->nb_philos;
@@ -98,6 +98,13 @@ int	all_alive_routine(t_data* data)
 	i = -1;
 	while (++i < nb_philos)
 	{
+
+		pthread_mutex_lock(&data->mut_end_loop);
+		end_loop_flag = data->end_loop;
+		pthread_mutex_unlock(&data->mut_end_loop);
+
+		if (end_loop_flag == 1)	
+			break ;
 		if (philo_died(&philos[i]))
 			break ;
 		if (i == nb_philos - 1) 

@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:35:26 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/26 12:20:15 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 12:58:26 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ int	run_threads(t_data *data)
 			return (1);
 		pthread_detach(data->philo_ths[i]);
 	}
+	if (nb_meals_option(data) == true)
+	{
+		pthread_create(&data->monit_all_full, NULL, all_full_routine, data);
+		pthread_detach(data->monit_all_full);
+	}
 	all_alive_routine(data);
-	// if (nb_meals_option(data) == true
-	// 	&& pthread_create(&data->monit_all_full, NULL,
-	// 		all_full_routine, data))
-		// return (1);
-	// usleep(5000);
 	return (0);
 }
 
