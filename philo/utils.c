@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:40:13 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/26 12:33:35 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 13:09:27 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ bool	nb_meals_option(t_data *data)
 
 void	free_data(t_data *data)
 {
-	// (void)data;
 	int	i;
 	int	nb_philos;
 

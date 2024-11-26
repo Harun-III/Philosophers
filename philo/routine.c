@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:39:03 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/26 12:33:16 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 13:09:05 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 */
 void	*routine(void *philo_p)
 {
-	t_philo *philo;
+	t_philo	*philo;
 	bool	end_loop_value;
 
 	philo = (t_philo *)philo_p;
@@ -35,15 +35,12 @@ void	*routine(void *philo_p)
 		pthread_mutex_lock(&philo->data->mut_end_loop);
 		end_loop_value = philo->end_loop;
 		pthread_mutex_unlock(&philo->data->mut_end_loop);
-
 		if (end_loop_value == false)
 			return (NULL);
-
 		if (eat(philo) == 1)
 			return (NULL);
 		ft_sleep(philo);
 		think(philo);
 	}
-
 	return (NULL);
 }
