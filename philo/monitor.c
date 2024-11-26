@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:32:11 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/25 20:36:48 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 01:37:00 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ bool	is_philo_full(t_data *data, t_philo *philo)
 {
 	bool	result;
 
+	pthread_mutex_lock(&philo->mut_nb_meals_had);
 	result = false;
 	if (get_nb_meals_philo_had(philo) >= data->nb_meals)
 		result = true;
+	pthread_mutex_unlock(&philo->mut_nb_meals_had);
 	return (result);
 }
 
@@ -29,12 +31,17 @@ bool	philo_died(t_philo *philo)
 
 	data = philo->data;
 	result = false;
-	long time_of_death = get_time() - get_last_eat_time(philo);
-	if (time_of_death > data->die_time
-		&& get_philo_state(philo) != EATING)
+
+	pthread_mutex_lock(&philo->mut_last_eat_time);
+	long last_meal = get_last_eat_time(philo);
+	pthread_mutex_unlock(&philo->mut_last_eat_time);
+	long time_of_death = get_time() - last_meal;
+	if (time_of_death > data->die_time)
 	{
-		set_philo_state(philo, DEAD);
-		printf("philo id %d dies at %ld", philo->id, time_of_death);
+		philo->data->end_loop = true;
+		pthread_mutex_lock(&data->mut_print);
+		printf("%d dies at %ld\n", philo->id, time_of_death);
+		// set_philo_state(philo, DEAD);
 		result = true;
 	}
 	return (result);
@@ -75,28 +82,28 @@ void	*all_full_routine(void *data_p)
 	return (NULL);
 }
 
-void	*all_alive_routine(void *data_p)
+int	all_alive_routine(t_data* data)
 {
 	int		i;
 	int		nb_philos;
-	t_data	*data;
 	t_philo	*philos;
 
-	data = (t_data *)data_p;
 	philos = data->philos;
 	nb_philos = data->nb_philos;
+
 	i = -1;
-	while (++i < nb_philos && get_keep_iter(data))
+	while (++i < nb_philos)
 	{
-		if (philo_died(&philos[i]) && get_keep_iter(data))
+		if (philo_died(&philos[i]))
 		{
-			print_msg(data, philos[i].id, DIED);
-			set_keep_iterating(data, false);
-			notify_all_philos(data);
+			fprintf(stderr, "------------ bool value : %d\n", data->end_loop);
+			// set_keep_iterating(data, false);
+			// notify_all_philos(data);
+			// break ;
 			break ;
 		}
-		if (i == nb_philos - 1)
+		if (i == nb_philos - 1) 
 			i = -1;
 	}
-	return (NULL);
+	return (0);
 }

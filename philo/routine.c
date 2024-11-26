@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:39:03 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/25 20:43:33 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 01:33:05 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,16 @@
 */
 void	*routine(void *philo_p)
 {
-	t_philo	*philo;
+	t_philo *philo;
 
 	philo = (t_philo *)philo_p;
-	// update_last_meal_time(philo);
 	if (philo->id % 2 == 0)
-		ft_usleep(philo->data->eat_time - 20);
-	while (get_philo_state(philo) != DEAD)
+		ft_usleep(40);
+	while (*(philo->end_loop) == false)
 	{
-		if (eat(philo) != 0)
-			break ;
-		if (get_philo_state(philo) == DEAD)
-			break ;
-		if (ft_sleep(philo) != 0)
-			break ;
-		if (get_philo_state(philo) == DEAD)
-			break ;
-		if (think(philo) != 0)
-			break ;
+		eat(philo);
+		ft_sleep(philo);
+		think(philo);
 	}
 	return (NULL);
 }

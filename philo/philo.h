@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:37:36 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/21 19:12:30 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 01:30:44 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_philo
 	pthread_mutex_t	mut_nb_meals_had;
 	pthread_mutex_t	mut_last_eat_time;
 	long			last_eat_time;
+	bool			*end_loop;
 }	t_philo;
 
 typedef struct s_data
@@ -87,6 +88,8 @@ typedef struct s_data
 	pthread_t		*philo_ths;
 	pthread_mutex_t	*forks;
 	t_philo			*philos;
+
+	bool			end_loop;
 }			t_data;
 
 /* parsing.c */
@@ -109,7 +112,7 @@ void		ft_usleep(long time);
 
 /* monitoring.c */
 void		*all_full_routine(void *data_p);
-void		*all_alive_routine(void *data_p);
+int			all_alive_routine(t_data *data_p);
 bool		philo_died(t_philo *philo);
 
 /* eat_1.c */

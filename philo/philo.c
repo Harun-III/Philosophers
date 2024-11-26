@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:35:26 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/25 20:41:50 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 01:35:35 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,40 +22,44 @@ int	run_threads(t_data *data)
 	data->start_time = get_time();
 	while (++i < nb_of_philos)
 	{
+		pthread_mutex_lock(&data->philos->mut_last_eat_time);
 		update_last_meal_time(&data->philos[i]);
+		pthread_mutex_unlock(&data->philos->mut_last_eat_time);
 		if (pthread_create(&data->philo_ths[i], NULL,
 				routine, &data->philos[i]))
 			return (1);
+		pthread_detach(data->philo_ths[i]);
 	}
-	if (pthread_create(&data->monit_all_alive, NULL,
-			all_alive_routine, data))
-		return (1);
-	if (nb_meals_option(data) == true
-		&& pthread_create(&data->monit_all_full, NULL,
-			all_full_routine, data))
-		return (1);
+	// pthread_create(&data->monit_all_alive, NULL, all_alive_routine, data);
+	// pthread_detach(data->monit_all_alive);
+	all_alive_routine(data);
+	usleep(100000);
+	// if (nb_meals_option(data) == true
+	// 	&& pthread_create(&data->monit_all_full, NULL,
+	// 		all_full_routine, data))
+	// 	return (1);
 	return (0);
 }
 
-int	join_threads(t_data *data)
-{
-	int	i;
-	int	nb_philos;
+// int	join_threads(t_data *data)
+// {
+// 	int	i;
+// 	int	nb_philos;
 
-	nb_philos = data->nb_philos;
-	i = -1;
-	if (pthread_join(data->monit_all_alive, NULL))
-		return (1);
-	if (nb_meals_option(data) == true
-		&& pthread_join(data->monit_all_full, NULL))
-		return (1);
-	while (++i < nb_philos)
-	{
-		if (pthread_join(data->philo_ths[i], NULL))
-			return (1);
-	}
-	return (0);
-}
+// 	nb_philos = data->nb_philos;
+// 	i = -1;
+// 	while (++i < nb_philos)
+// 	{
+// 		if ()
+// 			return (1);
+	// }
+	// if (pthread_detach(data->monit_all_alive))
+	// 	return (1);
+	// if (nb_meals_option(data) == true
+	// 	&& pthread_detach(data->monit_all_full))
+	// 	return (1);
+// 	return (0);
+// }
 
 static void	print_exit_error(void)
 {
@@ -80,12 +84,11 @@ int	main(int argc, char **argv)
 			free_data(&data);
 			error_exit ("Failed to execute threads");
 		}
-		if (join_threads(&data) != 0)
+		else 
 		{
 			free_data(&data);
-			error_exit ("Failed to join threads");
+			return (3);
 		}
-		free_data(&data);
 	}
 	else
 		print_exit_error();
