@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:35:26 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/26 14:05:51 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:10:07 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,11 @@ int	main(int argc, char **argv)
 	if (5 == argc || 6 == argc)
 	{
 		parse_and_set_timers(&data, argv);
+		if (data.nb_meals == 0)
+			return (0);
 		init_data(&data);
 		init_philos(&data);
 		init_forks(&data);
-		// if ()
 		if (run_threads(&data) != 0)
 		{
 			free_data(&data);
