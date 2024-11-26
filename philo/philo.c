@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:35:26 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/26 13:10:12 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:05:51 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,14 @@ int	main(int argc, char **argv)
 		init_data(&data);
 		init_philos(&data);
 		init_forks(&data);
+		// if ()
 		if (run_threads(&data) != 0)
 		{
 			free_data(&data);
 			error_exit ("Failed to execute threads");
 		}
 		else
-		{
 			free_data(&data);
-			return (3);
-		}
 	}
 	else
 		print_exit_error();

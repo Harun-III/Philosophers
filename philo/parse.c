@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:34:28 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/23 18:33:24 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:35:38 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,10 @@ void	parse_and_set_timers(t_data *data, char **argv)
 	data->sleep_time = ft_atol(argv[4]);
 	check_time(data);
 	if (argv[5])
+	{
 		data->nb_meals = ft_atol (argv[5]);
+		printf("number of meanl at stat: %d\n", data->nb_meals);
+	}
 	else
 		data->nb_meals = -1;
 }

@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:29:37 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/26 13:08:28 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:16:52 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ int	get_nb_meals_philo_had(t_philo *philo)
 {
 	int	nb_meals_had;
 
+	pthread_mutex_lock(&philo->mut_nb_meals_had);
 	nb_meals_had = philo->nb_meals_had;
+	pthread_mutex_unlock(&philo->mut_nb_meals_had);
 	return (nb_meals_had);
 }
 

@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:37:36 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/26 13:10:46 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:08:12 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,6 @@ int			get_nb_meals_philo_had(t_philo *philo);
 long		get_last_eat_time(t_philo *philo);
 
 /* setters.c */
-void		set_keep_iterating(t_data *data, bool set_to);
 void		set_philo_state(t_philo *philo, t_state state);
 
 // /* utils.c */

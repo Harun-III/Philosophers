@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:32:11 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/26 13:15:09 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:16:32 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@ bool	is_philo_full(t_data *data, t_philo *philo)
 {
 	bool	result;
 
-	pthread_mutex_lock(&philo->mut_nb_meals_had);
 	result = false;
 	if (get_nb_meals_philo_had(philo) >= data->nb_meals)
 		result = true;
-	pthread_mutex_unlock(&philo->mut_nb_meals_had);
 	return (result);
 }
 
