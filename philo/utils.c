@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:40:13 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/26 02:08:39 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 12:33:35 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	handle_1_philo(t_philo *philo)
 {
+	printf("one philo\n");
 	take_left_fork(philo);
 	ft_usleep(philo->data->die_time);
 	set_philo_state(philo, DEAD);
@@ -29,26 +30,26 @@ bool	nb_meals_option(t_data *data)
 
 void	free_data(t_data *data)
 {
-	(void)data;
-	// int	i;
-	// int	nb_philos;
+	// (void)data;
+	int	i;
+	int	nb_philos;
 
-	// nb_philos = data->nb_philos;
-	// i = -1;
-	// pthread_mutex_destroy(&data->mut_print);
-	// pthread_mutex_destroy(&data->mut_keep_iter);
-	// pthread_mutex_destroy(&data->mut_start_time);
-	// pthread_mutex_destroy(&data->mut_end_loop);
-	// free(data->philo_ths);
-	// free(data->philos);
-	// free(data->forks);
-	// while (++i < nb_philos)
-	// {
-	// 	pthread_mutex_destroy(&data->forks[i]);
-	// 	pthread_mutex_destroy(&data->philos[i].mut_state);
-	// 	pthread_mutex_destroy(&data->philos[i].mut_nb_meals_had);
-	// 	pthread_mutex_destroy(&data->philos[i].mut_last_eat_time);
-	// }
+	nb_philos = data->nb_philos;
+	i = -1;
+	pthread_mutex_destroy(&data->mut_print);
+	pthread_mutex_destroy(&data->mut_keep_iter);
+	pthread_mutex_destroy(&data->mut_start_time);
+	pthread_mutex_destroy(&data->mut_end_loop);
+	free(data->philo_ths);
+	free(data->philos);
+	free(data->forks);
+	while (++i < nb_philos)
+	{
+		pthread_mutex_destroy(&data->forks[i]);
+		pthread_mutex_destroy(&data->philos[i].mut_state);
+		pthread_mutex_destroy(&data->philos[i].mut_nb_meals_had);
+		pthread_mutex_destroy(&data->philos[i].mut_last_eat_time);
+	}
 }
 
 void	print_msg(t_data *data, int id, char *msg)

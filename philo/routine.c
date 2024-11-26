@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:39:03 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/26 02:13:26 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 12:33:16 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	*routine(void *philo_p)
 		if (end_loop_value == false)
 			return (NULL);
 
-		eat(philo);
+		if (eat(philo) == 1)
+			return (NULL);
 		ft_sleep(philo);
 		think(philo);
 	}

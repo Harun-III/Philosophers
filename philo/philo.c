@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:35:26 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/26 02:19:30 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 12:20:15 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	run_threads(t_data *data)
 	// 	&& pthread_create(&data->monit_all_full, NULL,
 	// 		all_full_routine, data))
 		// return (1);
-	usleep(5000);
+	// usleep(5000);
 	return (0);
 }
 
