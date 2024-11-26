@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:37:36 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/26 01:30:44 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 01:46:55 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,13 @@ typedef struct s_data
 	pthread_mutex_t	mut_print;
 	pthread_mutex_t	mut_keep_iter;
 	pthread_mutex_t	mut_start_time;
+	pthread_mutex_t	mut_end_loop;
 	pthread_t		monit_all_alive;
 	pthread_t		monit_all_full;
 	pthread_t		*philo_ths;
 	pthread_mutex_t	*forks;
 	t_philo			*philos;
+	
 
 	bool			end_loop;
 }			t_data;

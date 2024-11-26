@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:32:11 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/26 01:37:00 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 02:15:57 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,17 @@ bool	philo_died(t_philo *philo)
 	pthread_mutex_lock(&philo->mut_last_eat_time);
 	long last_meal = get_last_eat_time(philo);
 	pthread_mutex_unlock(&philo->mut_last_eat_time);
+
 	long time_of_death = get_time() - last_meal;
 	if (time_of_death > data->die_time)
 	{
+		pthread_mutex_lock(&data->mut_end_loop);
 		philo->data->end_loop = true;
+		pthread_mutex_unlock(&data->mut_end_loop);
+
 		pthread_mutex_lock(&data->mut_print);
 		printf("%d dies at %ld\n", philo->id, time_of_death);
-		// set_philo_state(philo, DEAD);
+
 		result = true;
 	}
 	return (result);
@@ -95,13 +99,7 @@ int	all_alive_routine(t_data* data)
 	while (++i < nb_philos)
 	{
 		if (philo_died(&philos[i]))
-		{
-			fprintf(stderr, "------------ bool value : %d\n", data->end_loop);
-			// set_keep_iterating(data, false);
-			// notify_all_philos(data);
-			// break ;
 			break ;
-		}
 		if (i == nb_philos - 1) 
 			i = -1;
 	}

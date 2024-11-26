@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:35:26 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/26 01:35:35 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 02:19:30 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,36 +30,14 @@ int	run_threads(t_data *data)
 			return (1);
 		pthread_detach(data->philo_ths[i]);
 	}
-	// pthread_create(&data->monit_all_alive, NULL, all_alive_routine, data);
-	// pthread_detach(data->monit_all_alive);
 	all_alive_routine(data);
-	usleep(100000);
 	// if (nb_meals_option(data) == true
 	// 	&& pthread_create(&data->monit_all_full, NULL,
 	// 		all_full_routine, data))
-	// 	return (1);
+		// return (1);
+	usleep(5000);
 	return (0);
 }
-
-// int	join_threads(t_data *data)
-// {
-// 	int	i;
-// 	int	nb_philos;
-
-// 	nb_philos = data->nb_philos;
-// 	i = -1;
-// 	while (++i < nb_philos)
-// 	{
-// 		if ()
-// 			return (1);
-	// }
-	// if (pthread_detach(data->monit_all_alive))
-	// 	return (1);
-	// if (nb_meals_option(data) == true
-	// 	&& pthread_detach(data->monit_all_full))
-	// 	return (1);
-// 	return (0);
-// }
 
 static void	print_exit_error(void)
 {

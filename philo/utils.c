@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:40:13 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/26 01:10:10 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 02:08:39 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ void	free_data(t_data *data)
 
 	// nb_philos = data->nb_philos;
 	// i = -1;
+	// pthread_mutex_destroy(&data->mut_print);
+	// pthread_mutex_destroy(&data->mut_keep_iter);
+	// pthread_mutex_destroy(&data->mut_start_time);
+	// pthread_mutex_destroy(&data->mut_end_loop);
+	// free(data->philo_ths);
+	// free(data->philos);
+	// free(data->forks);
 	// while (++i < nb_philos)
 	// {
 	// 	pthread_mutex_destroy(&data->forks[i]);
@@ -42,12 +49,6 @@ void	free_data(t_data *data)
 	// 	pthread_mutex_destroy(&data->philos[i].mut_nb_meals_had);
 	// 	pthread_mutex_destroy(&data->philos[i].mut_last_eat_time);
 	// }
-	// pthread_mutex_destroy(&data->mut_print);
-	// pthread_mutex_destroy(&data->mut_keep_iter);
-	// pthread_mutex_destroy(&data->mut_start_time);
-	// // free(data->philo_ths);
-	// free(data->philos);
-	// free(data->forks);
 }
 
 void	print_msg(t_data *data, int id, char *msg)
