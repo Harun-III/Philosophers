@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:35:26 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/27 21:12:38 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/27 21:55:33 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,18 @@ int	run_threads(t_data *data)
 	{
 		pthread_mutex_lock(&data->philos->mut_last_eat_time);
 		update_last_meal_time(&data->philos[i]);
-		// fprintf(stdout, "This is trun threads I just set the lastt mean time for philo %d and it is: %ld\n", data->philos[i].id, data->philos->last_eat_time);
 		pthread_mutex_unlock(&data->philos->mut_last_eat_time);
-		// fprintf(stdout, "This is the run threads function -->> end_loop flag is %d\n", data->end_loop);
 		if (pthread_create(&data->philo_ths[i], NULL,
 				routine, &data->philos[i]))
 			return (1);
 		pthread_detach(data->philo_ths[i]);
 	}
-	// if (nb_meals_option(data) == true)
-	// {
-	// 	pthread_create(&data->monit_all_full, NULL, all_full_routine, data);
-	// 	pthread_detach(data->monit_all_full);
-	// }
-	// while (1)
-	// {
-	// 		fprintf(stdout, "end loop flag is %d\n", data->end_loop);
-	// 		ft_usleep(500);
-	// }
+	if (nb_meals_option(data) == true)
+	{
+		pthread_create(&data->monit_all_full, NULL, all_full_routine, data);
+		pthread_detach(data->monit_all_full);
+	}
 	all_alive_routine(data);
-	// ft_usleep(100000);
 	return (0);
 }
 
@@ -61,24 +53,22 @@ int	main(int argc, char **argv)
 
 	if (5 == argc || 6 == argc)
 	{
-		parse_and_set_timers(&data, argv);
+		if (parse_and_set_timers(&data, argv) == -1)
+			return (1);
 		if (data.nb_meals == 0)
 			return (0);
-		init_data(&data);
+		if (init_data(&data) == -1)
+			return (1);
 		init_philos(&data);
 		init_forks(&data);
-
-		fprintf(stdout, "This is the main function end_loop flag is %d\n", data.end_loop);
-
 		if (run_threads(&data) != 0)
 		{
 			free_data(&data);
 			error_exit ("Failed to execute threads");
+			return (1);
 		}
 		else
-		{
 			free_data(&data);
-		}
 	}
 	else
 		print_exit_error();

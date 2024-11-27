@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:40:13 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/27 21:12:19 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:34:36 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,10 @@ void	free_data(t_data *data)
 
 void	print_msg(t_data *data, int id, char *msg)
 {
-	(void)msg;
 	long	time;
 
 	time = get_time() - get_start_time(data);
 	pthread_mutex_lock(&data->mut_print);
-	// fprintf(stdout, "I am thread id %d end of loop is %d\n", id, data->end_loop);
 	printf("%ld %d %s\n", time, id, msg);
 	pthread_mutex_unlock(&data->mut_print);
 }

@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:32:11 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/27 21:17:33 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/27 22:15:01 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,59 +71,21 @@ int	all_alive_routine(t_data *data)
 	int		i;
 	int		nb_philos;
 	t_philo	*philos;
-	// int		end_loop_flag;
+	bool	end_of_loop;
 
 	philos = data->philos;
 	nb_philos = data->nb_philos;
-
 	i = -1;
-
-
-
+	end_of_loop = false;
 	while (1)
 	{
-
-		// fprintf(stdout, "test bofore entering the philo_died() ;; this is random value from the data structure %ld\n", (&philos[1])->data->die_time);
-
-		if (philo_died(philos, data, i) == true) // this means a philos has dies
+		pthread_mutex_lock(&data->mut_end_loop);
+		end_of_loop = data->end_loop;
+		pthread_mutex_unlock(&data->mut_end_loop);
+		if (philo_died(philos, data, i) == true || end_of_loop == true)
 		{
 			ft_usleep(10);
-			fprintf(stdout, "This is the all_alive_routine a philo has died an I am braking\n");
-			return (0) ;
+			return (0);
 		}
 	}
-
-
-	// 	pthread_mutex_lock(&data->mut_end_loop);
-	// 	data->end_loop = true;
-	// 	pthread_mutex_unlock(&data->mut_end_loop);
-	// 		fprintf(stdout, "end loop flag is %d\n", data->end_loop);
-	// 	return (0);
-
-
-	// philos = data->philos;
-	// nb_philos = data->nb_philos;
-	// i = -1;
-
-	// 		fprintf(stdout, "end loop flag is %d\n", data->end_loop);
-	// 		// ft_usleep (200);
-
-	// while (1)
-	// {
-	// 	pthread_mutex_lock(&data->mut_end_loop);
-	// 	end_loop_flag = data->end_loop;
-	// 	pthread_mutex_unlock(&data->mut_end_loop);
-	// 	if (end_loop_flag == 1)
-	// 	{
-	// 		// fprintf(stdout, "end loop flag has changed %d\n", end_loop_flag);
-	// 		// ft_usleep (1);
-	// 		break ;
-	// 	}
-	// 	if (philo_died(&philos[i]))
-	// 	{
-	// 		// ft_usleep (1);
-	// 		break ;
-	// 	}
-	// }
-	// return (0);
 }

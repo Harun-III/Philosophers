@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:39:36 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/02 17:41:26 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:52:07 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,4 @@ long	get_time(void)
 void	error_exit(const char *message)
 {
 	printf(RED"Error: %s\n"RST, message);
-	exit(EXIT_FAILURE);
 }

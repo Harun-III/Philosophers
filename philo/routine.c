@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:39:03 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/27 21:17:14 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 20:45:55 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,8 @@ void	*routine(void *philo_p)
 		pthread_mutex_lock(&philo->data->mut_end_loop);
 		end_loop_value = philo->data->end_loop;
 		pthread_mutex_unlock(&philo->data->mut_end_loop);
-		// fprintf(stdout, "This is the run threads function -->> end_loop flag is %d\n", data->end_loop);
 		if (end_loop_value == true)
-		{
-			// fprintf(stdout, "I'm philo id: %d end of loop is now true\n", philo->id);
 			return (NULL);
-		}
 		if (eat(philo) == 1)
 			return (NULL);
 		ft_sleep(philo);

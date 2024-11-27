@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:34:28 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/26 14:35:38 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:05:06 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,17 +77,24 @@ static long	ft_atol(char *s)
 	{
 		return_value = (return_value * 10) + (*s - '0');
 		if (return_value > INT_MAX)
+		{
 			error_exit("Value exceeds the maximum limit for an integer");
+			return (-1);
+		}
 		s++;
 	}
 	return (return_value);
 }
 
-static void	check_time(t_data *data)
+static int	check_time(t_data *data)
 {
 	if (data->die_time < 60 || data->eat_time < 60
 		|| data->sleep_time < 60)
+	{
 		error_exit("Time values must be at least 60 milliseconds");
+		return (-1);
+	}
+	return (0);
 }
 
 /*
@@ -98,18 +105,27 @@ static void	check_time(t_data *data)
 ** 	we convert it to microseconds
 **	becose of usec
 */
-void	parse_and_set_timers(t_data *data, char **argv)
+int	parse_and_set_timers(t_data *data, char **argv)
 {
 	data->nb_philos = ft_atol(argv[1]);
+	if (data->nb_philos == -1)
+		return (-1);
 	data->die_time = ft_atol(argv[2]);
+	if (data->die_time == -1)
+		return (-1);
 	data->eat_time = ft_atol(argv[3]);
+	if (data->eat_time == -1)
+		return (-1);
 	data->sleep_time = ft_atol(argv[4]);
-	check_time(data);
+	if (data->sleep_time == -1)
+		return (-1);
+	if (check_time(data) == -1)
+		return (-1);
 	if (argv[5])
 	{
 		data->nb_meals = ft_atol (argv[5]);
-		printf("number of meanl at stat: %d\n", data->nb_meals);
 	}
 	else
 		data->nb_meals = -1;
+	return (0);
 }

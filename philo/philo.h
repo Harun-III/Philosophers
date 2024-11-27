@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:37:36 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/27 19:03:18 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/27 21:49:37 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ typedef struct s_philo
 	pthread_mutex_t	mut_nb_meals_had;
 	pthread_mutex_t	mut_last_eat_time;
 	long			last_eat_time;
-	bool			*end_loop;
 }	t_philo;
 
 typedef struct s_data
@@ -93,7 +92,7 @@ typedef struct s_data
 }			t_data;
 
 /* parsing.c */
-void		parse_and_set_timers(t_data *data, char **argv);
+int			parse_and_set_timers(t_data *data, char **argv);
 
 /* routine.c */
 void		*routine(void *philo_p);
@@ -102,7 +101,7 @@ void		*routine(void *philo_p);
 int			ft_atoi(char *str);
 
 /* init_data.c */
-void		init_data(t_data *data);
+int			init_data(t_data *data);
 void		init_philos(t_data *data);
 void		init_forks(t_data *data);
 
@@ -112,7 +111,7 @@ void		ft_usleep(long time);
 
 /* monitoring.c */
 void		*all_full_routine(void *data_p);
-int			all_alive_routine(t_data *data_p);
+int			all_alive_routine(t_data *data);
 
 /* eat_1.c */
 int			eat(t_philo *philo);
