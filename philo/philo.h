@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:37:36 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/26 14:08:12 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:03:18 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ void		ft_usleep(long time);
 /* monitoring.c */
 void		*all_full_routine(void *data_p);
 int			all_alive_routine(t_data *data_p);
-bool		philo_died(t_philo *philo);
 
 /* eat_1.c */
 int			eat(t_philo *philo);
