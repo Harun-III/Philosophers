@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:35:26 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/27 19:43:15 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/27 21:12:38 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ int	run_threads(t_data *data)
 	{
 		pthread_mutex_lock(&data->philos->mut_last_eat_time);
 		update_last_meal_time(&data->philos[i]);
-		fprintf(stdout, "This is trun threads I just set the lastt mean time for philo %d and it is: %ld\n", data->philos[i].id, data->philos->last_eat_time);
+		// fprintf(stdout, "This is trun threads I just set the lastt mean time for philo %d and it is: %ld\n", data->philos[i].id, data->philos->last_eat_time);
 		pthread_mutex_unlock(&data->philos->mut_last_eat_time);
+		// fprintf(stdout, "This is the run threads function -->> end_loop flag is %d\n", data->end_loop);
 		if (pthread_create(&data->philo_ths[i], NULL,
 				routine, &data->philos[i]))
 			return (1);
@@ -76,7 +77,7 @@ int	main(int argc, char **argv)
 		}
 		else
 		{
-			// free_data(&data);
+			free_data(&data);
 		}
 	}
 	else
