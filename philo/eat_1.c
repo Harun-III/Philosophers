@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:28:45 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/26 14:32:05 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/28 16:56:40 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,20 @@ void	update_last_meal_time(t_philo *philo)
 	philo->last_eat_time = get_time();
 }
 
+int	philo_sleep(t_data *data, long sleep_time)
+{
+	long	start;
+
+	start = get_time();
+	while ((get_time() - start) < sleep_time)
+	{
+		if (get_end_loop_val(data) == true)
+			return (1);
+		usleep(500);
+	}
+	return (0);
+}
+
 int	eat(t_philo *philo)
 {
 	if (take_forks(philo) == 1)
@@ -32,7 +46,8 @@ int	eat(t_philo *philo)
 	pthread_mutex_lock(&philo->mut_last_eat_time);
 	update_last_meal_time(philo);
 	pthread_mutex_unlock(&philo->mut_last_eat_time);
-	ft_usleep(philo->data->eat_time);
+	if (philo_sleep (philo->data, philo->data->eat_time) == 1)
+		return (1);
 	pthread_mutex_lock(&philo->mut_nb_meals_had);
 	philo->nb_meals_had++;
 	pthread_mutex_unlock(&philo->mut_nb_meals_had);

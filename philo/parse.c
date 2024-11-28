@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:34:28 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/26 16:05:06 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:37:32 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,44 +17,26 @@ static int	is_digit(char c)
 	return (c >= '0' && c <= '9');
 }
 
-/*
-** This function checks if a given string represents a valid positive integer.
-** It skips leading whitespaces, allows an optional '+' sign, and ensures that
-** the remaining characters are all digits. If the string contains any invalid
-** characters or is empty, the function will call error_exit with an appropriate
-** error message.
-**
-** Arguments:
-**     s: The input string to be validated.
-**
-** Returns:
-**     A pointer to the first non-whitespace character after the number if the
-**     string is valid. If the string is invalid, the function does not return
-**     and terminates the program.
-*/
 static char	*is_string_ok(char *s)
 {
-	char	*return_value;
+	char	*ptr;
 
-	while (*s)
+	if (s == NULL || s[0] == '\0')
 	{
-		while (*s == ' ' || (*s >= 9 && *s <= 13))
-			s++;
-		if (*s == '-')
-			error_exit("Philo does not accept negative values");
-		if (*s == '+')
-			s++;
-		if (!is_digit(*s))
-			error_exit("Invalid input: non-digit character encountered");
-		return_value = s;
-		while (is_digit(*s))
-			s++;
-		while (*s == ' ' || (*s >= 9 && *s <= 13))
-			s++;
-		if (*s != '\0')
-			error_exit("Invalid input: unexpected characters after number");
+		error_exit("Invalid String");
+		return (NULL);
 	}
-	return (return_value);
+	ptr = s;
+	while (*ptr != '\0')
+	{
+		if (!is_digit(*ptr))
+		{
+			error_exit("String contains non-digit characters");
+			return (NULL);
+		}
+		ptr++;
+	}
+	return (s);
 }
 
 /*
@@ -72,6 +54,8 @@ static long	ft_atol(char *s)
 	long	return_value;
 
 	return_value = 0;
+	if (is_string_ok(s) == NULL)
+		return (-1);
 	s = is_string_ok(s);
 	while (is_digit(*s))
 	{

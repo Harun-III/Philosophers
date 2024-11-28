@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:37:36 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/27 21:49:37 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:37:48 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,11 @@ void		*all_full_routine(void *data_p);
 int			all_alive_routine(t_data *data);
 
 /* eat_1.c */
+int			philo_sleep(t_data *data, long sleep_time);
 int			eat(t_philo *philo);
 void		update_last_meal_time(t_philo *philo);
 
-// /* eat_2.c */
+/* eat_2.c */
 int			take_forks(t_philo *philo);
 int			take_right_fork(t_philo *philo);
 int			take_left_fork(t_philo *philo);
@@ -131,14 +132,16 @@ int			ft_sleep(t_philo *philo);
 int			think(t_philo *philo);
 
 /* getters.c */
+bool		get_end_loop_val(t_data *data);
 long		get_start_time(t_data *data);
 int			get_nb_meals_philo_had(t_philo *philo);
 long		get_last_eat_time(t_philo *philo);
 
 /* setters.c */
+void		set_end_loop_val(t_data *data, bool val);
 void		set_philo_state(t_philo *philo, t_state state);
 
-// /* utils.c */
+/* utils.c */
 bool		nb_meals_option(t_data *data);
 void		free_data(t_data *data);
 void		print_msg(t_data *data, int id, char *msg);

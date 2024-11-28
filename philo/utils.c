@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:40:13 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/26 14:34:36 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/28 16:58:32 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	free_data(t_data *data)
 
 	nb_philos = data->nb_philos;
 	i = -1;
+	ft_usleep(100);
 	pthread_mutex_destroy(&data->mut_print);
 	pthread_mutex_destroy(&data->mut_keep_iter);
 	pthread_mutex_destroy(&data->mut_start_time);

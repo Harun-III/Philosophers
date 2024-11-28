@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:29:37 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/26 14:16:52 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/27 23:36:26 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,14 @@ long	get_start_time(t_data *data)
 	time = data->start_time;
 	pthread_mutex_unlock(&data->mut_start_time);
 	return (time);
+}
+
+bool	get_end_loop_val(t_data *data)
+{
+	bool	loop_end_flag;
+
+	pthread_mutex_lock(&data->mut_end_loop);
+	loop_end_flag = data->end_loop;
+	pthread_mutex_unlock(&data->mut_end_loop);
+	return (loop_end_flag);
 }
