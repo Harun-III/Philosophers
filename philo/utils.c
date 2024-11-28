@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:40:13 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/28 16:58:32 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:51:04 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	handle_1_philo(t_philo *philo)
 {
-	printf("one philo\n");
 	take_left_fork(philo);
 	ft_usleep(philo->data->die_time);
 	set_philo_state(philo, DEAD);
