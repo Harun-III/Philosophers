@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:31:46 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/27 22:11:25 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/28 21:11:03 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	init_forks(t_data *data)
 	philos = data->philos;
 	init_fork_mutexes(data);
 	i = 0;
-	philos[0].left_f = &data->forks[0];
-	philos[0].right_f = &data->forks[data->nb_philos - 1];
+	philos[0].left_f = &data->forks[data->nb_philos - 1];
+	philos[0].right_f = &data->forks[0];
 	while (++i < data->nb_philos)
 	{
 		philos[i].left_f = &data->forks[i - 1];
