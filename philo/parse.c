@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:34:28 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/28 18:02:07 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/28 18:08:20 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ int	parse_and_set_timers(t_data *data, char **argv)
 	if (argv[5])
 	{
 		data->nb_meals = ft_atol (argv[5]);
+		if (data->nb_meals == -1)
+			return (-1);
 	}
 	else
 		data->nb_meals = -1;
