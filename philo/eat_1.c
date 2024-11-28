@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:28:45 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/28 19:12:55 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/28 22:50:36 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	eat(t_philo *philo)
 {
 	if (take_forks(philo) == 1)
 		return (1);
-	set_philo_state(philo, EATING);
 	print_msg(philo->data, philo->id, EAT);
 	pthread_mutex_lock(&philo->mut_nb_meals_had);
 	philo->nb_meals_had++;

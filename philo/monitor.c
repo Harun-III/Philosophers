@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:32:11 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/28 17:04:23 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/28 22:03:27 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	all_alive_routine(t_data *data)
 				set_end_loop_val(data, true);
 				pthread_mutex_lock(&data->mut_print);
 				printf("%ld %d %s\n", get_time()
-					- get_last_eat_time(&philos[i]), philos[i].id, DIED);
+					- get_start_time(data), philos[i].id, DIED);
 				return (0);
 			}
 			i++;

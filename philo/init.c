@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:31:46 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/28 21:11:03 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/28 22:51:27 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	init_philos(t_data *data)
 	philos = data->philos;
 	while (++i < data->nb_philos)
 	{
-		philos[i].state = INITIAL;
 		philos[i].data = data;
 		philos[i].id = i + 1;
 		philos[i].nb_meals_had = 0;

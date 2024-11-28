@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:37:36 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/28 17:37:48 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/28 22:51:21 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,6 @@
 # define C		"\033[1;36m" /* Bold Cyan */
 # define W		"\033[1;37m" /* Bold White */
 
-typedef enum e_philo_state
-{
-	EATING = 0,
-	SLEEPING = 1,
-	THINKING = 2,
-	DEAD = 3,
-	FULL = 4,
-	INITIAL = 10
-}	t_state;
-
 struct	s_data;
 
 typedef struct s_philo
@@ -60,7 +50,6 @@ typedef struct s_philo
 	int				id;
 	int				nb_meals_had;
 	struct s_data	*data;
-	t_state			state;
 	pthread_mutex_t	*left_f;
 	pthread_mutex_t	*right_f;
 	pthread_mutex_t	mut_state;
@@ -139,7 +128,6 @@ long		get_last_eat_time(t_philo *philo);
 
 /* setters.c */
 void		set_end_loop_val(t_data *data, bool val);
-void		set_philo_state(t_philo *philo, t_state state);
 
 /* utils.c */
 bool		nb_meals_option(t_data *data);
