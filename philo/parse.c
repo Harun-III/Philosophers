@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:34:28 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/28 17:37:32 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/28 18:02:07 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ static int	check_time(t_data *data)
 int	parse_and_set_timers(t_data *data, char **argv)
 {
 	data->nb_philos = ft_atol(argv[1]);
+	if (data->nb_philos == 0)
+		return (error_exit("Number of philos can't be 0"), -1);
 	if (data->nb_philos == -1)
 		return (-1);
 	data->die_time = ft_atol(argv[2]);
