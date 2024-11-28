@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:32:11 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/23 23:26:00 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:04:23 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,6 @@ bool	is_philo_full(t_data *data, t_philo *philo)
 	return (result);
 }
 
-bool	philo_died(t_philo *philo)
-{
-	bool	is_dead;
-
-	is_dead = false;
-	pthread_mutex_lock(&philo->mut_state);
-	pthread_mutex_lock(&philo->mut_last_eat_time);
-	if (get_time() - philo->last_eat_time > philo->data->die_time
-		&& philo->state != EATING)
-	{
-		is_dead = true;
-		philo->state = DEAD;
-	}
-	pthread_mutex_unlock(&philo->mut_last_eat_time);
-	pthread_mutex_unlock(&philo->mut_state);
-	return (is_dead);
-}
-
 void	*all_full_routine(void *data_p)
 {
 	t_data	*data;
@@ -49,52 +31,53 @@ void	*all_full_routine(void *data_p)
 	data = (t_data *)data_p;
 	i = -1;
 	nb_philos = data->nb_philos;
-	while (++i < nb_philos && get_keep_iter(data))
+	while (++i < nb_philos)
 	{
 		if (is_philo_full(data, &data->philos[i]) == false)
 			i = -1;
 	}
-	if (get_keep_iter(data) == true)
-	{
-		set_keep_iterating(data, false);
-		notify_all_philos(data);
-	}
+	pthread_mutex_lock(&data->mut_end_loop);
+	data->end_loop = true;
+	pthread_mutex_unlock(&data->mut_end_loop);
+	pthread_mutex_lock(&data->mut_print);
 	return (NULL);
 }
 
-static void	philo_died_set_flag(t_data *data, bool *should_continue, int *i)
+static bool	has_philosopher_died(t_philo *philo, t_data *data)
 {
-	pthread_mutex_lock(&data->mut_print);
-	pthread_mutex_lock(&data->mut_keep_iter);
-	if (data->keep_iterating)
-	{
-		printf("%ld %d %s\n", get_time() - get_start_time(data),
-			data->philos[(*i)].id, DIED);
-		data->keep_iterating = false;
-		notify_all_philos(data);
-		*should_continue = false;
-	}
-	pthread_mutex_unlock(&data->mut_keep_iter);
-	pthread_mutex_unlock(&data->mut_print);
+	long	last_eat_time;
+	long	time_since_last_meal;
+
+	pthread_mutex_lock(&philo->mut_last_eat_time);
+	last_eat_time = get_last_eat_time(philo);
+	pthread_mutex_unlock(&philo->mut_last_eat_time);
+	time_since_last_meal = get_time() - last_eat_time;
+	return (time_since_last_meal >= data->die_time);
 }
 
-void	all_alive_routine(t_data *data)
+int	all_alive_routine(t_data *data)
 {
-	bool	should_continue;
+	int		nb_philos;
+	t_philo	*philos;
 	int		i;
 
-	should_continue = true;
-	while (should_continue)
+	(1) && (nb_philos = data->nb_philos, philos = data->philos, i = 0);
+	while (1)
 	{
-		i = -1;
-		while ((++i < data->nb_philos) && should_continue)
+		while (i < nb_philos)
 		{
-			if (philo_died(&data->philos[i]))
-				philo_died_set_flag (data, &should_continue, &i);
+			if (get_end_loop_val(data) == true)
+				return (0);
+			if (has_philosopher_died(&philos[i], data))
+			{
+				set_end_loop_val(data, true);
+				pthread_mutex_lock(&data->mut_print);
+				printf("%ld %d %s\n", get_time()
+					- get_last_eat_time(&philos[i]), philos[i].id, DIED);
+				return (0);
+			}
+			i++;
 		}
-		usleep(100);
-		pthread_mutex_lock(&data->mut_keep_iter);
-		should_continue = data->keep_iterating;
-		pthread_mutex_unlock(&data->mut_keep_iter);
+		i = 0;
 	}
 }

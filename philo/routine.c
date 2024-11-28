@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:39:03 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/23 22:57:08 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/28 16:50:19 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,24 @@
 void	*routine(void *philo_p)
 {
 	t_philo	*philo;
-	bool	should_continue;
-	bool	simulation_finished;
 
-	should_continue = true;
 	philo = (t_philo *)philo_p;
 	if (philo->id % 2 == 0)
-		ft_usleep(philo->data->eat_time - 10);
-	while (should_continue)
+		ft_usleep(40);
+	while (true)
 	{
-		pthread_mutex_lock(&philo->data->mut_simulation);
-		simulation_finished = philo->data->is_simulation_finished;
-		pthread_mutex_unlock(&philo->data->mut_simulation);
-		if (simulation_finished || (eat(philo) != 0))
+		if (get_end_loop_val(philo->data))
 			break ;
-		pthread_mutex_lock(&philo->data->mut_keep_iter);
-		should_continue = philo->data->keep_iterating;
-		pthread_mutex_unlock(&philo->data->mut_keep_iter);
-		if (!should_continue || ft_sleep(philo) != 0 || think(philo) != 0)
+		if (eat(philo) == 1)
+			break ;
+		if (get_end_loop_val(philo->data))
+			break ;
+		if (ft_sleep(philo) == 1)
+			break ;
+		if (get_end_loop_val(philo->data))
+			break ;
+		think(philo);
+		if (get_end_loop_val(philo->data))
 			break ;
 	}
 	return (NULL);

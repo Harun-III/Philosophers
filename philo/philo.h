@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:37:36 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/23 23:19:17 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:37:48 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ typedef struct s_philo
 
 typedef struct s_data
 {
-	bool			keep_iterating;
 	int				nb_philos;
 	int				nb_meals;
 	int				nb_full_p;
+	bool			keep_iterating;
 	long			eat_time;
 	long			die_time;
 	long			sleep_time;
@@ -82,18 +82,17 @@ typedef struct s_data
 	pthread_mutex_t	mut_print;
 	pthread_mutex_t	mut_keep_iter;
 	pthread_mutex_t	mut_start_time;
+	pthread_mutex_t	mut_end_loop;
 	pthread_t		monit_all_alive;
 	pthread_t		monit_all_full;
 	pthread_t		*philo_ths;
 	pthread_mutex_t	*forks;
 	t_philo			*philos;
-	bool			is_simulation_finished;
-	pthread_mutex_t	mut_simulation;
+	bool			end_loop;
 }			t_data;
 
-void		all_alive_routine(t_data *data);
 /* parsing.c */
-void		parse_and_set_timers(t_data *data, char **argv);
+int			parse_and_set_timers(t_data *data, char **argv);
 
 /* routine.c */
 void		*routine(void *philo_p);
@@ -102,7 +101,7 @@ void		*routine(void *philo_p);
 int			ft_atoi(char *str);
 
 /* init_data.c */
-void		init_data(t_data *data);
+int			init_data(t_data *data);
 void		init_philos(t_data *data);
 void		init_forks(t_data *data);
 
@@ -112,14 +111,14 @@ void		ft_usleep(long time);
 
 /* monitoring.c */
 void		*all_full_routine(void *data_p);
-// void		*all_alive_routine(void *data_p);
-bool		philo_died(t_philo *philo);
+int			all_alive_routine(t_data *data);
 
 /* eat_1.c */
+int			philo_sleep(t_data *data, long sleep_time);
 int			eat(t_philo *philo);
 void		update_last_meal_time(t_philo *philo);
 
-// /* eat_2.c */
+/* eat_2.c */
 int			take_forks(t_philo *philo);
 int			take_right_fork(t_philo *philo);
 int			take_left_fork(t_philo *philo);
@@ -133,17 +132,16 @@ int			ft_sleep(t_philo *philo);
 int			think(t_philo *philo);
 
 /* getters.c */
-bool		get_keep_iter(t_data *data);
+bool		get_end_loop_val(t_data *data);
 long		get_start_time(t_data *data);
-t_state		get_philo_state(t_philo *philo);
 int			get_nb_meals_philo_had(t_philo *philo);
 long		get_last_eat_time(t_philo *philo);
 
 /* setters.c */
-bool		set_keep_iterating(t_data *data, bool set_to);
+void		set_end_loop_val(t_data *data, bool val);
 void		set_philo_state(t_philo *philo, t_state state);
 
-// /* utils.c */
+/* utils.c */
 bool		nb_meals_option(t_data *data);
 void		free_data(t_data *data);
 void		print_msg(t_data *data, int id, char *msg);

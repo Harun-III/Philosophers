@@ -6,7 +6,7 @@
 #    By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/02 17:46:17 by eghalime          #+#    #+#              #
-#    Updated: 2024/11/23 21:58:04 by eghalime         ###   ########.fr        #
+#    Updated: 2024/11/28 17:00:37 by eghalime         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRCS =	eat_1.c eat_2.c \
 
 OBJS = $(SRCS:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror  -fsanitize=thread
+FLAGS = -Wall -Wextra -Werror
 
 CC = cc
 RM = rm -rf
