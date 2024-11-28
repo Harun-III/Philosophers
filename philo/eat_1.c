@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:28:45 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/28 16:56:40 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/28 19:12:55 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ int	eat(t_philo *philo)
 		return (1);
 	set_philo_state(philo, EATING);
 	print_msg(philo->data, philo->id, EAT);
+	pthread_mutex_lock(&philo->mut_nb_meals_had);
+	philo->nb_meals_had++;
+	pthread_mutex_unlock(&philo->mut_nb_meals_had);
 	pthread_mutex_lock(&philo->mut_last_eat_time);
 	update_last_meal_time(philo);
 	pthread_mutex_unlock(&philo->mut_last_eat_time);
 	if (philo_sleep (philo->data, philo->data->eat_time) == 1)
 		return (1);
-	pthread_mutex_lock(&philo->mut_nb_meals_had);
-	philo->nb_meals_had++;
-	pthread_mutex_unlock(&philo->mut_nb_meals_had);
 	drop_forks(philo);
 	return (0);
 }
