@@ -6,13 +6,13 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:28:45 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/28 22:50:36 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/30 11:55:23 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	drop_forks(t_philo *philo)
+static void	drop_forks(t_philo *philo)
 {
 	pthread_mutex_unlock(philo->right_f);
 	pthread_mutex_unlock(philo->left_f);

@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:31:46 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/28 22:51:27 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/30 12:09:51 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	init_philos(t_data *data)
 		philos[i].data = data;
 		philos[i].id = i + 1;
 		philos[i].nb_meals_had = 0;
-		pthread_mutex_init(&philos[i].mut_state, NULL);
 		pthread_mutex_init(&philos[i].mut_nb_meals_had, NULL);
 		pthread_mutex_init(&philos[i].mut_last_eat_time, NULL);
 	}
@@ -97,7 +96,6 @@ int	init_data(t_data *data)
 	data->nb_full_p = 0;
 	data->keep_iterating = true;
 	pthread_mutex_init(&data->mut_print, NULL);
-	pthread_mutex_init(&data->mut_keep_iter, NULL);
 	pthread_mutex_init(&data->mut_start_time, NULL);
 	pthread_mutex_init(&data->mut_end_loop, NULL);
 	data->end_loop = false;

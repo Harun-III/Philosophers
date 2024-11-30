@@ -6,7 +6,7 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:37:36 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/28 22:51:21 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/30 12:13:42 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_philo
 	struct s_data	*data;
 	pthread_mutex_t	*left_f;
 	pthread_mutex_t	*right_f;
-	pthread_mutex_t	mut_state;
+	// pthread_mutex_t	mut_state;
 	pthread_mutex_t	mut_nb_meals_had;
 	pthread_mutex_t	mut_last_eat_time;
 	long			last_eat_time;
@@ -69,7 +69,6 @@ typedef struct s_data
 	long			sleep_time;
 	long			start_time;
 	pthread_mutex_t	mut_print;
-	pthread_mutex_t	mut_keep_iter;
 	pthread_mutex_t	mut_start_time;
 	pthread_mutex_t	mut_end_loop;
 	pthread_t		monit_all_alive;
@@ -80,45 +79,15 @@ typedef struct s_data
 	bool			end_loop;
 }			t_data;
 
-/* parsing.c */
-int			parse_and_set_timers(t_data *data, char **argv);
-
-/* routine.c */
-void		*routine(void *philo_p);
-
-/* parse.c */
-int			ft_atoi(char *str);
-
-/* init_data.c */
-int			init_data(t_data *data);
-void		init_philos(t_data *data);
-void		init_forks(t_data *data);
-
-/* time.c */
-long		get_time(void);
-void		ft_usleep(long time);
-
-/* monitoring.c */
-void		*all_full_routine(void *data_p);
-int			all_alive_routine(t_data *data);
-
 /* eat_1.c */
 int			philo_sleep(t_data *data, long sleep_time);
 int			eat(t_philo *philo);
 void		update_last_meal_time(t_philo *philo);
 
 /* eat_2.c */
-int			take_forks(t_philo *philo);
 int			take_right_fork(t_philo *philo);
 int			take_left_fork(t_philo *philo);
-void		drop_right_fork(t_philo *philo);
-void		drop_left_fork(t_philo *philo);
-
-/* sleep.c */
-int			ft_sleep(t_philo *philo);
-
-/* think.c */
-int			think(t_philo *philo);
+int			take_forks(t_philo *philo);
 
 /* getters.c */
 bool		get_end_loop_val(t_data *data);
@@ -126,8 +95,33 @@ long		get_start_time(t_data *data);
 int			get_nb_meals_philo_had(t_philo *philo);
 long		get_last_eat_time(t_philo *philo);
 
+/* init.c */
+int			init_data(t_data *data);
+void		init_philos(t_data *data);
+void		init_forks(t_data *data);
+
+/* monitor.c */
+void		*all_full_routine(void *data_p);
+int			all_alive_routine(t_data *data);
+
+/* parse.c */
+int			parse_and_set_timers(t_data *data, char **argv);
+
+/* routine.c */
+void		*routine(void *philo_p);
+
 /* setters.c */
 void		set_end_loop_val(t_data *data, bool val);
+
+/* sleep.c */
+int			ft_sleep(t_philo *philo);
+
+/* think.c */
+int			think(t_philo *philo);
+
+/* time.c */
+long		get_time(void);
+void		ft_usleep(long time);
 
 /* utils.c */
 bool		nb_meals_option(t_data *data);

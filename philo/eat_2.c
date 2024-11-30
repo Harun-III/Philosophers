@@ -6,21 +6,11 @@
 /*   By: eghalime <eghalime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 17:29:09 by eghalime          #+#    #+#             */
-/*   Updated: 2024/11/26 00:04:00 by eghalime         ###   ########.fr       */
+/*   Updated: 2024/11/30 11:54:17 by eghalime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	drop_left_fork(t_philo *philo)
-{
-	pthread_mutex_unlock(philo->left_f);
-}
-
-void	drop_right_fork(t_philo *philo)
-{
-	pthread_mutex_unlock(philo->right_f);
-}
 
 int	take_left_fork(t_philo *philo)
 {
